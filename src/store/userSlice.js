@@ -1,28 +1,40 @@
 import { createSlice } from "@reduxjs/toolkit";
 
-const counterSlice = createSlice({
-  name: "Users",
-  initialState: [
-    {
-      name: "Name",
-      token: "Token",
-    },
-  ],
+
+const initialState = {
+  isLoggedIn: false,
+  userData: {},
+
+};
+
+
+const userSlice = createSlice({
+  name: "user",
+  initialState,
   reducers: {
-    auth: {
-      reducer: (state, action) => {
-        state.value += action.payload;
-      },
-      prepare: (newValue) => ({ payload: newValue }),
+
+    loginSuccess: (state, action) => {
+      state.isLoggedIn = true;
+      state.userData["authenticationCode"] = action.payload;
     },
-    register: {
-      reducer: (state, action) => {
-        state.value -= action.payload;
-      },
-      prepare: (newValue) => ({ payload: newValue }),
+
+  
+    register: (state, action) => {
+      state.userData["userName"] = action.payload;
     },
+
+  
+    logout: (state) => {
+      state.isLoggedIn = false;
+      state.userData = null;
+    },
+
+
   },
 });
 
-export const { auth, register } = counterSlice.actions;
-export default counterSlice.reducer;
+
+export const { loginSuccess, logout } = userSlice.actions;
+
+
+export default userSlice.reducer;
