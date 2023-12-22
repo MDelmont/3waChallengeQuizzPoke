@@ -1,8 +1,8 @@
-import React, { useState, useEffect } from 'react';
-import axios from 'axios';
-import { useParams, useNavigate } from 'react-router-dom';
-import { Pagination } from '../features/pagination/Pagination';
-import { PokemonDetails } from './PokemonDetails';
+import React, { useState, useEffect } from "react";
+import axios from "axios";
+import { useParams, useNavigate } from "react-router-dom";
+import { Pagination } from "../features/pagination/Pagination";
+import { PokemonDetails } from "./PokemonDetails";
 
 export const LearnPage = () => {
   const { page } = useParams();
@@ -11,15 +11,19 @@ export const LearnPage = () => {
   const [pokemonData, setPokemonData] = useState([]);
   const [currentPage, setCurrentPage] = useState(1);
   const [totalPages, setTotalPages] = useState(1);
-  const [searchTerm, setSearchTerm] = useState('');
+  const [searchTerm, setSearchTerm] = useState("");
 
   const fetchData = async (newPage) => {
     try {
-      const response = await axios.get(`https://pokeapi.co/api/v2/pokemon?limit=10&offset=${(newPage - 1) * 10}`);
+      const response = await axios.get(
+        `https://pokeapi.co/api/v2/pokemon?limit=10&offset=${
+          (newPage - 1) * 10
+        }`
+      );
       setPokemonData(response.data.results);
       setTotalPages(Math.ceil(response.data.count / 10));
     } catch (error) {
-      console.error('Error fetching Pokemon data:', error);
+      console.error("Error fetching Pokemon data:", error);
     }
   };
 
@@ -35,12 +39,12 @@ export const LearnPage = () => {
 
   const getPokemonImage = (pokemon) => {
     // Extracting the ID from the URL
-    const id = pokemon.url.split('/').slice(-2, -1)[0];
+    const id = pokemon.url.split("/").slice(-2, -1)[0];
     return `https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/${id}.png`;
   };
 
   const getPokemonId = (pokemon) => {
-    return pokemon.url.split('/').slice(-2, -1)[0];
+    return pokemon.url.split("/").slice(-2, -1)[0];
   };
 
   const handleSearchChange = (event) => {
@@ -74,8 +78,12 @@ export const LearnPage = () => {
         />
         <i className="fas fa-search"></i>
       </div>
-      <Pagination currentPage={currentPage} totalPages={totalPages} onPageChange={handlePageChange} />
-      <Pagination currentPage={currentPage} totalPages={totalPages} onPageChange={handlePageChange} />
+
+      <Pagination
+        currentPage={currentPage}
+        totalPages={totalPages}
+        onPageChange={handlePageChange}
+      />
       <div className="pokemon-container">
         {filteredPokemon.map((pokemon) => (
           <div key={pokemon.url} className="pc-container">
@@ -84,7 +92,11 @@ export const LearnPage = () => {
                 <img src={getPokemonImage(pokemon)} alt={pokemon.name} />
                 <div className="circle"></div>
                 <h5 className="poke-id"> #{getPokemonId(pokemon)}</h5>
-                <h5 className="poke-name"> {pokemon.name.charAt(0).toUpperCase() + pokemon.name.slice(1)} </h5>
+                <h5 className="poke-name">
+                  {" "}
+                  {pokemon.name.charAt(0).toUpperCase() +
+                    pokemon.name.slice(1)}{" "}
+                </h5>
               </div>
               <div className="card_back">
                 <PokemonDetails pokemon={pokemon} />
@@ -94,8 +106,12 @@ export const LearnPage = () => {
         ))}
         ))}
       </div>
-      <Pagination currentPage={currentPage} totalPages={totalPages} onPageChange={handlePageChange} />
-      <Pagination currentPage={currentPage} totalPages={totalPages} onPageChange={handlePageChange} />
+
+      <Pagination
+        currentPage={currentPage}
+        totalPages={totalPages}
+        onPageChange={handlePageChange}
+      />
     </div>
   );
 };
