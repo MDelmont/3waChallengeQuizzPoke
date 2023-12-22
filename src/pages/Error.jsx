@@ -1,3 +1,5 @@
+import { Link } from "react-router-dom";
+
 export const ErrorPage = () => {
   return (
     <div className="not-found-page">
@@ -20,9 +22,9 @@ export const ErrorPage = () => {
 
         <h3 style={{ fontWeight: 500, letterSpacing: 4 }}>page not found</h3>
 
-        <a href="#" className="btn-link">
+        <Link to={"/"} className="btn-link">
           Back to Home
-        </a>
+        </Link>
       </div>
     </div>
   );

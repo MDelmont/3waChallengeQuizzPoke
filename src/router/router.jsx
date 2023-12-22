@@ -89,7 +89,7 @@ export const router = createBrowserRouter([
     element: <RegisterPage />,
   },
   {
-    path: "/error",
+    path: "*",
     element: <ErrorPage />,
   },
 ]);
