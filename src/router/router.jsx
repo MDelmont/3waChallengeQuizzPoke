@@ -6,10 +6,13 @@ import {
 } from "react-router-dom";
 import { Home } from "../pages/Home";
 import { LearnPage } from "../pages/Learn";
-
+import { LoginPage } from "../pages/Login";
+import { ErrorPage } from "../pages/Error";
+import { RegisterPage } from "../pages/register";
 import { QuizzPage } from "../pages/Quizzpage";
 import { LeaderBoard } from "../pages/LeaderBoard";
-import { PokemonDetails } from '../pages/PokemonDetails';
+import { AuthGuard } from "./AuthGuard";
+import { PokemonDetails } from "../pages/PokemonDetails";
 
 
 /**
@@ -64,7 +67,7 @@ export const router = createBrowserRouter([
         element: <Home />,
       },
       {
-        path: "LearnPage/:page/*", 
+        path: "LearnPage/:page/*",
         element: <LearnPage />,
       },
       {
