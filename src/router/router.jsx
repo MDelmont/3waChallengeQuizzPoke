@@ -12,6 +12,8 @@ import { RegisterPage } from "../pages/register";
 import { QuizzPage } from "../pages/Quizzpage";
 import { LeaderBoard } from "../pages/LeaderBoard";
 import { AuthGuard } from "./AuthGuard";
+import { PokemonDetails } from '../pages/PokemonDetails';
+
 const Root = () => {
   const navigate = useNavigate();
   const handleClicLogOut = () => {
@@ -60,7 +62,7 @@ export const router = createBrowserRouter([
         element: <Home />,
       },
       {
-        path: "LearnPage/:page", 
+        path: "LearnPage/:page/*", 
         element: <LearnPage />,
       },
       {
@@ -70,6 +72,10 @@ export const router = createBrowserRouter([
       {
         path: "LeaderBoard",
         element: <LeaderBoard />,
+      },
+      {
+        path: "pokemon/:id",
+        element: <PokemonDetails />,
       },
     ],
   },
