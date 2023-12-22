@@ -9,6 +9,7 @@ import { LearnPage } from "../pages/Learn";
 
 import { QuizzPage } from "../pages/Quizzpage";
 import { LeaderBoard } from "../pages/LeaderBoard";
+import { PokemonDetails } from '../pages/PokemonDetails';
 
 
 /**
@@ -63,7 +64,7 @@ export const router = createBrowserRouter([
         element: <Home />,
       },
       {
-        path: "LearnPage",
+        path: "LearnPage/:page/*", 
         element: <LearnPage />,
       },
       {
@@ -73,6 +74,10 @@ export const router = createBrowserRouter([
       {
         path: "LeaderBoard",
         element: <LeaderBoard />,
+      },
+      {
+        path: "pokemon/:id",
+        element: <PokemonDetails />,
       },
       {
         path: "pokemon/:id",

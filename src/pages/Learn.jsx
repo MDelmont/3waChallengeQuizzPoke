@@ -63,35 +63,23 @@ export const LearnPage = () => {
       <Pagination currentPage={currentPage} totalPages={totalPages} onPageChange={handlePageChange} />
       <Pagination currentPage={currentPage} totalPages={totalPages} onPageChange={handlePageChange} />
       <div className="pokemon-container">
-        <div className="pc-container">
-          <div className="pokemon-card">
-            <div
-              className="card_front"
-              style={{
-                background:
-                  'linear-gradient(150deg, rgb(210, 242, 194) 50%, rgb(247, 205, 247) 50%)',
-              }}
-            >
-              <img src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/1.png" />
-              <div className="circle"></div>
-              <h5 className="poke-id"> #1 </h5>
-              <h5 className="poke-name"> Bulbasaur </h5>
-              <h5> Grass / Poison</h5>
-            </div>
-            <div className="card_back"></div>
-          </div>
-        </div>
-        <div className="pc-container">
-          <div className="pokemon-card">
-            <div
-              className="card_front"
-              style={{ background: 'rgb(255, 201, 218)' }}
-            >
-              <img src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/150.png" />
-              <div className="circle"></div>
-              <h5 className="poke-id"> #150 </h5>
-              <h5 className="poke-name"> Mewtwo </h5>
-              <h5> Psychic</h5>
+        {pokemonData.map((pokemon, index) => (
+          <div key={index} className="pc-container">
+            
+            {/* Div principal du Pokemon data */}
+            <div className="pokemon-card">
+              <div className="card_front">
+                <img src={getPokemonImage((currentPage - 1) * 10 + index + 1)} alt={pokemon.name} />
+                <div className="circle"></div>
+                <h5 className="poke-id"> #{getPokemonId(index)}</h5>
+                <h5 className="poke-name"> {pokemon.name.charAt(0).toUpperCase() + pokemon.name.slice(1)} </h5>
+                {/* Ici on met Pokemon types */}
+              </div>
+              <div className="card_back">
+                
+                <PokemonDetails pokemon={pokemon} />
+                
+              </div>
             </div>
           </div>
         ))}

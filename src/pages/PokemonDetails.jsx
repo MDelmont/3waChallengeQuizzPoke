@@ -26,8 +26,6 @@ export const PokemonDetails = ({ pokemon }) => {
       <p>Height: {pokemonDetails.height}</p>
       <p>Weight: {pokemonDetails.weight}</p>
       <p>Types: {pokemonDetails.types.map(type => type.type.name).join(', ')}</p>
-      <p>Abilities: {pokemonDetails.abilities.map(ability => ability.ability.name).join(', ')}</p>
-
     </div>
   );
 };
