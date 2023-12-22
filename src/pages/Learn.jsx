@@ -1,32 +1,42 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
+import { useParams, useNavigate } from 'react-router-dom';
 import { Pagination } from '../features/pagination/Pagination';
 import { PokemonDetails } from './PokemonDetails';
 
 export const LearnPage = () => {
+  const { page } = useParams();
+  const navigate = useNavigate();
+
   const [pokemonData, setPokemonData] = useState([]);
   const [currentPage, setCurrentPage] = useState(1);
   const [totalPages, setTotalPages] = useState(1);
 
-  const fetchData = async (page = 1) => {
+  const fetchData = async (newPage) => {
     try {
-      const response = await axios.get(`https://pokeapi.co/api/v2/pokemon?limit=10&offset=${(page - 1) * 10}`);
+      const response = await axios.get(`https://pokeapi.co/api/v2/pokemon?limit=10&offset=${(newPage - 1) * 10}`);
       setPokemonData(response.data.results);
       setTotalPages(Math.ceil(response.data.count / 10));
     } catch (error) {
-      console.error('Erreur lors du fetch Pokemon data:', error);
+      console.error('Error fetching Pokemon data:', error);
     }
   };
 
   useEffect(() => {
-    fetchData();
-  }, []);
+    fetchData(page || 1);
+    setCurrentPage(parseInt(page, 10) || 1);
+  }, [page]);
 
-  const handlePageChange = (page) => {
-    setCurrentPage(page);
-    fetchData(page);
+  const handlePageChange = (newPage) => {
+    setCurrentPage(newPage);
+    navigate(`/LearnPage/${newPage}`);
   };
-
+  const getPokemonImage = (pokemonNumber) => {
+    return `https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/${pokemonNumber}.png`;
+  };
+  const getPokemonId = (index) => {
+    return (currentPage - 1) * 10 + index + 1;
+  };
   return (
     <div>
       <p>
