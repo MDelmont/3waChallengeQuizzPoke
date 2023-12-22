@@ -12,6 +12,8 @@ import { RegisterPage } from "../pages/register";
 import { QuizzPage } from "../pages/Quizzpage";
 import { LeaderBoard } from "../pages/LeaderBoard";
 import { AuthGuard } from "./AuthGuard";
+import { PokemonDetails } from "../pages/PokemonDetails";
+
 
 /**
  * creat template of page with nav and content
@@ -32,7 +34,7 @@ const Root = () => {
               <Link to="/">Home</Link>
             </li>
             <li>
-              <Link to="/LearnPage">LearnPage</Link>
+              <Link to="/LearnPage/1">LearnPage</Link>
             </li>
             <li>
               <Link to="/QuizzPage">QuizzPage</Link>
@@ -50,9 +52,7 @@ const Root = () => {
     </div>
   );
 };
-/**
- * Create root of projet
- */
+
 export const router = createBrowserRouter([
   {
     path: "/",
@@ -67,7 +67,7 @@ export const router = createBrowserRouter([
         element: <Home />,
       },
       {
-        path: "LearnPage",
+        path: "LearnPage/:page/*",
         element: <LearnPage />,
       },
       {
@@ -77,6 +77,14 @@ export const router = createBrowserRouter([
       {
         path: "LeaderBoard",
         element: <LeaderBoard />,
+      },
+      {
+        path: "pokemon/:id",
+        element: <PokemonDetails />,
+      },
+      {
+        path: "pokemon/:id",
+        element: <PokemonDetails />,
       },
     ],
   },
