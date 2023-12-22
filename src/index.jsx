@@ -16,8 +16,6 @@ const root = createRoot(document.getElementById("app"));
 root.render(
   <StrictMode>
     <GetProviderStore>
-      {/*<ErrorPage />*/}
-      {/*<LoginPage />*/}
       {<App />}
     </GetProviderStore>
   </StrictMode>

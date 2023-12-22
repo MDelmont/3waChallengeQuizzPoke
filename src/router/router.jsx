@@ -1,10 +1,11 @@
 import { createBrowserRouter, Link, Outlet } from "react-router-dom";
 import { Home } from "../pages/Home";
 import { LearnPage } from "../pages/Learn";
-
+import { LoginPage } from "../pages/Login";
+import { ErrorPage } from "../pages/Error";
+import { RegisterPage } from "../pages/register";
 import { QuizzPage } from "../pages/Quizzpage";
 import { LeaderBoard } from "../pages/LeaderBoard";
-
 
 /**
  * creat template of page with nav and content
@@ -62,5 +63,17 @@ export const router = createBrowserRouter([
         element: <LeaderBoard />,
       },
     ],
+  },
+  {
+    path: "/login",
+    element: <LoginPage />,
+  },
+  {
+    path: "/register",
+    element: <RegisterPage />,
+  },
+  {
+    path: "/error",
+    element: <ErrorPage />,
   },
 ]);
