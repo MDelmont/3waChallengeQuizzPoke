@@ -2,8 +2,7 @@ import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import { useParams, useNavigate } from 'react-router-dom';
 import { Pagination } from '../features/pagination/Pagination';
-import {PokemonDetails} from './PokemonDetails';
-
+import { PokemonDetails } from './PokemonDetails';
 
 export const LearnPage = () => {
   const { page } = useParams();
@@ -12,6 +11,7 @@ export const LearnPage = () => {
   const [pokemonData, setPokemonData] = useState([]);
   const [currentPage, setCurrentPage] = useState(1);
   const [totalPages, setTotalPages] = useState(1);
+  const [searchTerm, setSearchTerm] = useState('');
 
   const fetchData = async (newPage) => {
     try {
@@ -32,12 +32,25 @@ export const LearnPage = () => {
     setCurrentPage(newPage);
     navigate(`/LearnPage/${newPage}`);
   };
-  const getPokemonImage = (pokemonNumber) => {
-    return `https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/${pokemonNumber}.png`;
+
+  const getPokemonImage = (pokemon) => {
+    // Extracting the ID from the URL
+    const id = pokemon.url.split('/').slice(-2, -1)[0];
+    return `https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/${id}.png`;
   };
-  const getPokemonId = (index) => {
-    return (currentPage - 1) * 10 + index + 1;
+
+  const getPokemonId = (pokemon) => {
+    return pokemon.url.split('/').slice(-2, -1)[0];
   };
+
+  const handleSearchChange = (event) => {
+    setSearchTerm(event.target.value);
+  };
+
+  const filteredPokemon = pokemonData.filter((pokemon) =>
+    pokemon.name.toLowerCase().includes(searchTerm.toLowerCase())
+  );
+
   return (
     <div>
       <p>
@@ -52,27 +65,28 @@ export const LearnPage = () => {
         of wisdom begin!"
       </p>
       <div className="search-box-container">
-        <input type="text" className="search-box" placeholder="Search" />
+        <input
+          type="text"
+          className="search-box"
+          placeholder="Search"
+          value={searchTerm}
+          onChange={handleSearchChange}
+        />
         <i className="fas fa-search"></i>
       </div>
       <Pagination currentPage={currentPage} totalPages={totalPages} onPageChange={handlePageChange} />
       <div className="pokemon-container">
-        {pokemonData.map((pokemon, index) => (
-          <div key={index} className="pc-container">
-            
-            {/* Div principal du Pokemon data */}
+        {filteredPokemon.map((pokemon) => (
+          <div key={pokemon.url} className="pc-container">
             <div className="pokemon-card">
               <div className="card_front">
-                <img src={getPokemonImage((currentPage - 1) * 10 + index + 1)} alt={pokemon.name} />
+                <img src={getPokemonImage(pokemon)} alt={pokemon.name} />
                 <div className="circle"></div>
-                <h5 className="poke-id"> #{getPokemonId(index)}</h5>
+                <h5 className="poke-id"> #{getPokemonId(pokemon)}</h5>
                 <h5 className="poke-name"> {pokemon.name.charAt(0).toUpperCase() + pokemon.name.slice(1)} </h5>
-                {/* Ici on met Pokemon types */}
               </div>
               <div className="card_back">
-                
                 <PokemonDetails pokemon={pokemon} />
-                
               </div>
             </div>
           </div>
