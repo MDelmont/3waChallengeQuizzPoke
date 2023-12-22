@@ -1,15 +1,9 @@
 import { createBrowserRouter, Link, Outlet } from "react-router-dom";
 import { Home } from "../pages/Home";
 import { LearnPage } from "../pages/Learn";
-
 import { QuizzPage } from "../pages/Quizzpage";
 import { LeaderBoard } from "../pages/LeaderBoard";
 
-
-/**
- * creat template of page with nav and content
- * @returns Template of page
- */
 const Root = () => {
   return (
     <div>
@@ -20,7 +14,7 @@ const Root = () => {
               <Link to="/">Home</Link>
             </li>
             <li>
-              <Link to="/LearnPage">LearnPage</Link>
+              <Link to="/LearnPage/1">LearnPage</Link>
             </li>
             <li>
               <Link to="/QuizzPage">QuizzPage</Link>
@@ -37,9 +31,7 @@ const Root = () => {
     </div>
   );
 };
-/**
- * Create root of projet
- */
+
 export const router = createBrowserRouter([
   {
     path: "/",
@@ -50,7 +42,7 @@ export const router = createBrowserRouter([
         element: <Home />,
       },
       {
-        path: "LearnPage",
+        path: "LearnPage/:page", 
         element: <LearnPage />,
       },
       {
