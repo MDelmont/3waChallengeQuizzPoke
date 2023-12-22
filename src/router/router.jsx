@@ -6,18 +6,13 @@ import {
 } from "react-router-dom";
 import { Home } from "../pages/Home";
 import { LearnPage } from "../pages/Learn";
-<<<<<<< HEAD
 import { LoginPage } from "../pages/Login";
 import { ErrorPage } from "../pages/Error";
 import { RegisterPage } from "../pages/register";
 import { QuizzPage } from "../pages/Quizzpage";
 import { LeaderBoard } from "../pages/LeaderBoard";
 import { AuthGuard } from "./AuthGuard";
-=======
-import { QuizzPage } from "../pages/Quizzpage";
-import { LeaderBoard } from "../pages/LeaderBoard";
->>>>>>> 3dd39a580e887acc3caeb89c8d8195da3830cff6
-import { PokemonDetails } from '../pages/PokemonDetails';
+import { PokemonDetails } from "../pages/PokemonDetails";
 
 const Root = () => {
   const navigate = useNavigate();
@@ -67,7 +62,7 @@ export const router = createBrowserRouter([
         element: <Home />,
       },
       {
-        path: "LearnPage/:page/*", 
+        path: "LearnPage/:page/*",
         element: <LearnPage />,
       },
       {
