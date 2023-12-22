@@ -1,0 +1,616 @@
+* {
+  box-sizing: border-box;
+}
+
+:root {
+  --not-found-size: 8rem;
+  --color-red: #e53935;
+}
+
+body {
+  margin: 0;
+  padding: 1rem;
+  font-family: system-ui, sans-serif;
+  color: black;
+  background-color: white;
+}
+
+h1 {
+  font-weight: 800;
+  font-size: 1.5rem;
+}
+
+/* =====================================*/
+/*            BOOTSTRAP STYLES          */
+h1 {
+  font-size: 2.5rem;
+}
+
+h5 {
+  font-size: 1.25rem;
+}
+
+h1,
+h5 {
+  line-height: 1.2;
+  margin-bottom: 0.5rem;
+  font-weight: 500;
+}
+/* ====================================== */
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: 'Segoe UI';
+  color: #212529;
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+
+  overflow-y: scroll; /*To always have the scrollbar*/
+
+  background: #abbaab;
+  background: linear-gradient(to right, #d0ece7, #edeed8);
+}
+
+h1 {
+  align-self: center;
+  margin: 30px 0 15px 0;
+  font-family: 'Lemonada', cursive;
+  text-align: center;
+
+  color: rgb(0, 0, 0, 0.8);
+}
+
+.pokemon-container {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+
+  /*Both these lines are only useful for the loader*/
+  height: a;
+  align-items: center;
+}
+
+/* ============================ */
+/* CARD STYLING BEGINS HERE */
+/* =========================== */
+.pc-container {
+  margin: 20px;
+}
+
+.pokemon-card {
+  position: relative;
+  height: 300px;
+  width: 185px;
+
+  box-shadow: 0 3px 15px rgba(100, 100, 100, 0.5);
+  border-radius: 20px;
+
+  transition: transform 1.5s;
+  transform-style: preserve-3d;
+}
+
+.pc-container:hover .pokemon-card {
+  transform: rotateY(0.5turn);
+  cursor: pointer;
+}
+
+.card_front {
+  z-index: -2;
+}
+
+.card_back,
+.card_front {
+  position: absolute;
+
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+
+  border-radius: 20px;
+  border: 4px solid #fff;
+  backface-visibility: hidden;
+  /* transform-style: preserve-3d; */
+}
+
+.card_back {
+  transform: rotateY(0.5turn);
+  background-color: #464646;
+  color: white;
+  border: 4px solid #464646;
+}
+
+.poke-stats-name {
+  font-weight: bold;
+  font-size: 0.8rem;
+}
+
+.poke-stats-bar {
+  width: 70%;
+  height: 8px;
+  margin-bottom: 15px;
+  /* border: 1px solid black; */
+}
+
+/* ============================ */
+/* CARD STYLING ENDS HERE */
+/* =========================== */
+
+.poke-id {
+  margin-top: 10px;
+  border-radius: 20px;
+  padding: 3px 10px;
+  font-size: 1.1rem;
+  background: rgba(0, 0, 0, 0.2);
+}
+
+img {
+  width: 70%;
+}
+
+.circle {
+  padding: 65px;
+  position: absolute;
+  background: rgba(255, 255, 255, 0.5);
+  border-radius: 50%;
+  top: 6%;
+  z-index: -1;
+}
+
+.poke-name {
+  font-weight: bold;
+  text-align: center;
+}
+
+.loader {
+  border: 10px solid rgb(0, 0, 0, 0.4);
+  border-radius: 50%;
+  border-top: 10px solid transparent;
+  height: 65px;
+  width: 65px;
+
+  animation: spin 1.5s linear infinite;
+}
+
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+.search-box-container {
+  align-self: center;
+  width: 50%;
+  display: flex;
+  margin-bottom: 30px;
+}
+
+.search-box {
+  width: 100%;
+  border: none;
+  background: transparent;
+  outline: none;
+  font-size: 1.1rem;
+  font-weight: bold;
+  border-bottom: 3px solid rgb(0, 0, 0, 0.9);
+  padding-bottom: 5px;
+}
+
+.fa-search {
+  border-bottom: 3px solid rgb(0, 0, 0, 0.9);
+  color: rgb(0, 0, 0, 0.9);
+}
+
+.search-box:focus {
+  border-bottom: 3px solid limegreen;
+}
+
+.search-box:focus + .fa-search {
+  border-bottom: 3px solid limegreen;
+  color: limegreen;
+}
+
+.button-container {
+  align-self: center;
+  margin-bottom: 15px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.button-container button {
+  background: transparent;
+  color: #464646;
+  border: none;
+  outline: none;
+  font-size: 1.3rem;
+  height: 30px;
+  width: 30px;
+  border: 3px solid #464646;
+  border-radius: 50%;
+  margin: 0 5px;
+}
+
+.button-container button i {
+  pointer-events: none;
+}
+
+/* .button-container button:hover {
+  cursor: pointer;
+} */
+
+.button-container .pagination {
+  height: 30px;
+  width: 30px;
+  line-height: 30px;
+  text-align: center;
+  margin: 0 2px;
+  font-weight: bold;
+  transition: all 0.2s;
+  user-select: none;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.current-page {
+  color: whitesmoke;
+  background: #464646;
+  border-radius: 3px;
+}
+
+.button-container .restrict-click {
+  color: lightgrey;
+  border: 3px solid lightgray;
+}
+
+.button-container .restrict-click {
+  color: lightgrey;
+  border: 3px solid lightgray;
+}
+
+.qBox {
+  box-shadow: 10px 10px 30px #333;
+}
+.jumbotron,
+.jumbotron .row {
+  background-color: rgba(157, 52, 99, 0.7);
+  width: 100%;
+}
+
+/* LEADER BOARD */
+.page-leaderboard .hero {
+  background-image: url(https://d125fmws0bore1.cloudfront.net/assets/pages/leaderboard/hero-leaderboard-b861e1752ed28ae950fcfccd51008fe7f4d158a08c68e909201f46e6086992ad.jpg);
+}
+.page-leaderboard .leaderboard-progress {
+  clear: both;
+}
+.page-leaderboard .leaderboard-progress .contain {
+  padding: 3em 1.5em 2em 1.5em;
+}
+.page-leaderboard .leaderboard-progress p {
+  max-width: 48.5em;
+  margin: 0 auto;
+}
+.page-leaderboard .ranking .contain {
+  padding: 0 1.5em;
+}
+.page-leaderboard .ranking .ranking-table {
+  max-width: 66em;
+  margin: 0 auto;
+}
+.page-leaderboard .ranking .ranking-table-body {
+  border: solid 0.063em #dbe2e8;
+  max-height: 24.625em;
+  overflow: scroll;
+  -webkit-overflow-scrolling: touch;
+}
+.page-leaderboard .ranking .ranking-table-header-row {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  padding-top: 1.125em;
+}
+.page-leaderboard .ranking .ranking-table-header-data {
+  text-align: center;
+  align-self: center;
+}
+.page-leaderboard .ranking .ranking-table-header-data:first-child {
+  width: 20%;
+}
+.page-leaderboard .ranking .ranking-table-row {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  padding-top: 0.875em;
+  padding-bottom: 0.875em;
+  background-color: #fff;
+}
+.page-leaderboard .ranking .ranking-table-row:nth-child(even) {
+  background-color: #fafbfc;
+}
+.page-leaderboard .ranking .ranking-table-row-leader-1,
+.page-leaderboard .ranking .ranking-table-row-leader-2,
+.page-leaderboard .ranking .ranking-table-row-leader-3 {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  padding-top: 0.875em;
+  padding-bottom: 0.875em;
+  background-color: #fff;
+  box-shadow: 0 0 0.75em 0 rgba(46, 60, 73, 0.12);
+  border-radius: 0.375rem;
+  margin-bottom: 1.25em;
+}
+.page-leaderboard
+  .ranking
+  .ranking-table-row-leader-1
+  .ranking-table-data-leader-1,
+.page-leaderboard
+  .ranking
+  .ranking-table-row-leader-2
+  .ranking-table-data-leader-2,
+.page-leaderboard
+  .ranking
+  .ranking-table-row-leader-3
+  .ranking-table-data-leader-3 {
+  display: flex;
+  justify-content: center;
+  width: 20%;
+}
+.page-leaderboard
+  .ranking
+  .ranking-table-row-leader-1
+  .ranking-table-data-leader-1
+  .medal-gold,
+.page-leaderboard
+  .ranking
+  .ranking-table-row-leader-2
+  .ranking-table-data-leader-2
+  .medal-silver,
+.page-leaderboard
+  .ranking
+  .ranking-table-row-leader-3
+  .ranking-table-data-leader-3
+  .medal-bronze {
+  margin-top: -1.313em;
+  height: 2.875em;
+  width: 2.875em;
+}
+.page-leaderboard .ranking .ranking-table-row-leader-1 {
+  border: solid 0.125em #ecc81a;
+}
+.page-leaderboard
+  .ranking
+  .ranking-table-row-leader-1
+  .ranking-table-data-leader-1
+  .medal-gold {
+  background: url(https://d125fmws0bore1.cloudfront.net/assets/pages/leaderboard/medal-gold-c49052bfa07f36621f16dbe77f7fc36cbafd72ff088ea970256ff998be05687b.svg)
+    no-repeat;
+  background-size: contain;
+}
+.page-leaderboard .ranking .ranking-table-row-leader-2 {
+  border: solid 0.125em #dbe2e8;
+}
+.page-leaderboard
+  .ranking
+  .ranking-table-row-leader-2
+  .ranking-table-data-leader-2
+  .medal-silver {
+  background: url(https://d125fmws0bore1.cloudfront.net/assets/pages/leaderboard/medal-silver-d099c5dd916c167c3ba4716c8968a819f317daaef1901c8e8bae6c6932852faa.svg)
+    no-repeat;
+  background-size: contain;
+}
+.page-leaderboard .ranking .ranking-table-row-leader-3 {
+  border: solid 0.125em #dfdfd1;
+}
+.page-leaderboard
+  .ranking
+  .ranking-table-row-leader-3
+  .ranking-table-data-leader-3
+  .medal-bronze {
+  background: url(https://d125fmws0bore1.cloudfront.net/assets/pages/leaderboard/medal-bronze-d0f15d413800257442c8d4b2d5239cfe28c9fd9594f863ab1fad5258f8d1d5eb.svg)
+    no-repeat;
+  background-size: contain;
+}
+.page-leaderboard .ranking .ranking-table-data {
+  align-self: center;
+  color: #525c65;
+  font-size: 1em;
+}
+.page-leaderboard .ranking .ranking-table-data:first-child {
+  text-align: center;
+  width: 20%;
+  color: #525c65;
+  font-weight: 600;
+}
+.page-leaderboard .ranking .ranking-table-data:nth-child(2) {
+  color: #2e3d49;
+  width: 55%;
+  font-size: 0.875em;
+  padding-left: 9%;
+}
+.page-leaderboard .ranking .ranking-table-data:nth-child(3) {
+  font-size: 0.875em;
+  text-align: center;
+  width: 25%;
+  padding-right: 4%;
+}
+.page-leaderboard .ranking .ranking-table-data:nth-child(3) .complete {
+  margin: -1.25em auto;
+  transform: translateY(18%);
+  background: url(https://d125fmws0bore1.cloudfront.net/assets/pages/leaderboard/leaderboard-complete-316433dd02f79185962dbaa82ad025c4722722e8ad276abe2aa00463a145691e.svg)
+    no-repeat;
+  background-size: contain;
+  width: 3em;
+  height: 3em;
+}
+/* LOGIN PAGE */
+.form {
+  position: relative;
+  z-index: 1;
+  background: #ffffff;
+  max-width: 360px;
+  margin: 0 auto 100px;
+  padding: 45px;
+  text-align: center;
+  box-shadow: 0 0 20px 0 rgba(0, 0, 0, 0.2), 0 5px 5px 0 rgba(0, 0, 0, 0.24);
+}
+.form input {
+  font-family: 'Roboto', sans-serif;
+  outline: 0;
+  background: #f2f2f2;
+  width: 100%;
+  border: 0;
+  margin: 0 0 15px;
+  padding: 15px;
+  box-sizing: border-box;
+  font-size: 14px;
+}
+.form button {
+  font-family: 'Roboto', sans-serif;
+  text-transform: uppercase;
+  outline: 0;
+  background: #4caf50;
+  width: 100%;
+  border: 0;
+  padding: 15px;
+  color: #ffffff;
+  font-size: 14px;
+  -webkit-transition: all 0.3 ease;
+  transition: all 0.3 ease;
+  cursor: pointer;
+}
+.form button:hover,
+.form button:active,
+.form button:focus {
+  background: #43a047;
+}
+.form .message {
+  margin: 15px 0 0;
+  color: #b3b3b3;
+  font-size: 12px;
+}
+.form .message a {
+  color: #4caf50;
+  text-decoration: none;
+}
+.form .register-form {
+  display: none;
+}
+
+/*
+ ERROR PAGE
+*/
+
+.sorry {
+  color: var(--color-red);
+  letter-spacing: 4px;
+}
+
+.not-found {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+  font-size: var(--not-found-size);
+}
+
+.pokeball-wrapper {
+  background: white;
+  margin: 0 0.5rem;
+  border: 4px solid currentColor;
+  width: calc(var(--not-found-size) - 3rem);
+  height: calc(var(--not-found-size) - 3rem);
+  border-radius: 50%;
+  overflow: hidden;
+  position: relative;
+}
+
+.pokeball-red {
+  background: #e53935;
+  width: 200%;
+  transform: translate3d(-25%, 0, 0);
+  height: calc(50% + 4px);
+  border-bottom: 4px solid;
+  border-radius: 50%;
+}
+
+.pokeball-ball__center {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate3d(-50%, -50%, 0);
+  border: 4px solid;
+  width: 50%;
+  height: 50%;
+  border-radius: 50%;
+  background: #455a64;
+}
+
+.pokeball-ball__center:after {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate3d(-50%, -50%, 0);
+  background: white;
+  width: 50%;
+  height: 50%;
+  border: 4px solid;
+  border-radius: 50%;
+}
+
+.pokeball-shadow {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 110%;
+  height: 110%;
+  border-radius: 50%;
+  transform: translate3d(-15%, -20%, 0);
+  box-shadow: 10px 10px rgba(0, 0, 0, 0.1);
+}
+
+.not-found__shadow {
+  min-width: 120%;
+  height: 25px;
+  background: #d6e1e6;
+  border-radius: 50%;
+  margin-bottom: 2rem;
+  margin-top: -1rem;
+}
+
+.btn-link {
+  display: inline-block;
+  margin-top: 2rem;
+  color: white;
+  background: var(--color-red);
+  border-radius: 4px;
+  padding: 5px;
+  font-size: 0.8rem;
+  text-decoration: none;
+}
+
+.not-found-page {
+  text-transform: uppercase;
+  color: #273446;
+  min-height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+}
