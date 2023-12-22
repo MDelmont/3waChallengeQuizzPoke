@@ -1,55 +1,31 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
-import { useParams, useNavigate } from 'react-router-dom';
 import { Pagination } from '../features/pagination/Pagination';
 import { PokemonDetails } from './PokemonDetails';
 
 export const LearnPage = () => {
-  const { page } = useParams();
-  const navigate = useNavigate();
-
   const [pokemonData, setPokemonData] = useState([]);
   const [currentPage, setCurrentPage] = useState(1);
   const [totalPages, setTotalPages] = useState(1);
-  const [searchTerm, setSearchTerm] = useState('');
 
-  const fetchData = async (newPage) => {
+  const fetchData = async (page = 1) => {
     try {
-      const response = await axios.get(`https://pokeapi.co/api/v2/pokemon?limit=10&offset=${(newPage - 1) * 10}`);
+      const response = await axios.get(`https://pokeapi.co/api/v2/pokemon?limit=10&offset=${(page - 1) * 10}`);
       setPokemonData(response.data.results);
       setTotalPages(Math.ceil(response.data.count / 10));
     } catch (error) {
-      console.error('Error fetching Pokemon data:', error);
+      console.error('Erreur lors du fetch Pokemon data:', error);
     }
   };
 
   useEffect(() => {
-    fetchData(page || 1);
-    setCurrentPage(parseInt(page, 10) || 1);
-  }, [page]);
+    fetchData();
+  }, []);
 
-  const handlePageChange = (newPage) => {
-    setCurrentPage(newPage);
-    navigate(`/LearnPage/${newPage}`);
+  const handlePageChange = (page) => {
+    setCurrentPage(page);
+    fetchData(page);
   };
-
-  const getPokemonImage = (pokemon) => {
-    // Extracting the ID from the URL
-    const id = pokemon.url.split('/').slice(-2, -1)[0];
-    return `https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/${id}.png`;
-  };
-
-  const getPokemonId = (pokemon) => {
-    return pokemon.url.split('/').slice(-2, -1)[0];
-  };
-
-  const handleSearchChange = (event) => {
-    setSearchTerm(event.target.value);
-  };
-
-  const filteredPokemon = pokemonData.filter((pokemon) =>
-    pokemon.name.toLowerCase().includes(searchTerm.toLowerCase())
-  );
 
   return (
     <div>
@@ -75,23 +51,43 @@ export const LearnPage = () => {
         <i className="fas fa-search"></i>
       </div>
       <Pagination currentPage={currentPage} totalPages={totalPages} onPageChange={handlePageChange} />
+      <Pagination currentPage={currentPage} totalPages={totalPages} onPageChange={handlePageChange} />
       <div className="pokemon-container">
-        {filteredPokemon.map((pokemon) => (
-          <div key={pokemon.url} className="pc-container">
-            <div className="pokemon-card">
-              <div className="card_front">
-                <img src={getPokemonImage(pokemon)} alt={pokemon.name} />
-                <div className="circle"></div>
-                <h5 className="poke-id"> #{getPokemonId(pokemon)}</h5>
-                <h5 className="poke-name"> {pokemon.name.charAt(0).toUpperCase() + pokemon.name.slice(1)} </h5>
-              </div>
-              <div className="card_back">
-                <PokemonDetails pokemon={pokemon} />
-              </div>
+        <div className="pc-container">
+          <div className="pokemon-card">
+            <div
+              className="card_front"
+              style={{
+                background:
+                  'linear-gradient(150deg, rgb(210, 242, 194) 50%, rgb(247, 205, 247) 50%)',
+              }}
+            >
+              <img src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/1.png" />
+              <div className="circle"></div>
+              <h5 className="poke-id"> #1 </h5>
+              <h5 className="poke-name"> Bulbasaur </h5>
+              <h5> Grass / Poison</h5>
+            </div>
+            <div className="card_back"></div>
+          </div>
+        </div>
+        <div className="pc-container">
+          <div className="pokemon-card">
+            <div
+              className="card_front"
+              style={{ background: 'rgb(255, 201, 218)' }}
+            >
+              <img src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/150.png" />
+              <div className="circle"></div>
+              <h5 className="poke-id"> #150 </h5>
+              <h5 className="poke-name"> Mewtwo </h5>
+              <h5> Psychic</h5>
             </div>
           </div>
         ))}
+        ))}
       </div>
+      <Pagination currentPage={currentPage} totalPages={totalPages} onPageChange={handlePageChange} />
       <Pagination currentPage={currentPage} totalPages={totalPages} onPageChange={handlePageChange} />
     </div>
   );
