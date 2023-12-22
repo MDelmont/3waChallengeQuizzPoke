@@ -2,6 +2,8 @@ import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import { useParams, useNavigate } from 'react-router-dom';
 import { Pagination } from '../features/pagination/Pagination';
+import {PokemonDetails} from './PokemonDetails';
+
 
 export const LearnPage = () => {
   const { page } = useParams();
@@ -67,7 +69,11 @@ export const LearnPage = () => {
                 <h5 className="poke-name"> {pokemon.name.charAt(0).toUpperCase() + pokemon.name.slice(1)} </h5>
                 {/* Ici on met Pokemon types */}
               </div>
-              <div className="card_back">blablabla</div>
+              <div className="card_back">
+                
+                <PokemonDetails pokemon={pokemon} />
+                
+              </div>
             </div>
           </div>
         ))}

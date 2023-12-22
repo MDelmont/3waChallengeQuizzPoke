@@ -3,6 +3,7 @@ import { Home } from "../pages/Home";
 import { LearnPage } from "../pages/Learn";
 import { QuizzPage } from "../pages/Quizzpage";
 import { LeaderBoard } from "../pages/LeaderBoard";
+import { PokemonDetails } from '../pages/PokemonDetails';
 
 const Root = () => {
   return (
@@ -42,7 +43,7 @@ export const router = createBrowserRouter([
         element: <Home />,
       },
       {
-        path: "LearnPage/:page", 
+        path: "LearnPage/:page/*", 
         element: <LearnPage />,
       },
       {
@@ -52,6 +53,10 @@ export const router = createBrowserRouter([
       {
         path: "LeaderBoard",
         element: <LeaderBoard />,
+      },
+      {
+        path: "pokemon/:id",
+        element: <PokemonDetails />,
       },
     ],
   },
